@@ -1,0 +1,115 @@
+mysql> USE task6;
+Database changed
+mysql> CREATE TABLE Students (
+    ->     id INT,
+    ->     name VARCHAR(50),
+    ->     marks INT,
+    ->     dept_id INT
+    -> );
+Query OK, 0 rows affected (0.707 sec)
+
+mysql> INSERT INTO Students VALUES
+    -> (1, 'Anu', 80, 1),
+    -> (2, 'Rahul', 60, 1),
+    -> (3, 'Sneha', 90, 2),
+    -> (4, 'Kiran', 70, 2);
+Query OK, 4 rows affected (0.386 sec)
+Records: 4  Duplicates: 0  Warnings: 0
+
+mysql> SELECT name, marks
+    -> FROM Students
+    -> WHERE marks > (SELECT AVG(marks) FROM Students);
++-------+-------+
+| name  | marks |
++-------+-------+
+| Anu   |    80 |
+| Sneha |    90 |
++-------+-------+
+2 rows in set (0.033 sec)
+
+mysql> SELECT name,
+    ->        marks,
+    ->        (SELECT AVG(marks) FROM Students) AS avg_marks
+    -> FROM Students;
++-------+-------+-----------+
+| name  | marks | avg_marks |
++-------+-------+-----------+
+| Anu   |    80 |   75.0000 |
+| Rahul |    60 |   75.0000 |
+| Sneha |    90 |   75.0000 |
+| Kiran |    70 |   75.0000 |
++-------+-------+-----------+
+4 rows in set (0.008 sec)
+
+mysql> SELECT dept_id, avg_marks
+    -> FROM (
+    ->     SELECT dept_id, AVG(marks) AS avg_marks
+    ->     FROM Students
+    ->     GROUP BY dept_id
+    -> ) AS dept_avg;
++---------+-----------+
+| dept_id | avg_marks |
++---------+-----------+
+|       1 |   70.0000 |
+|       2 |   80.0000 |
++---------+-----------+
+2 rows in set (0.033 sec)
+
+mysql>mysql> USE task6;
+Database changed
+mysql> CREATE TABLE Students (
+    ->     id INT,
+    ->     name VARCHAR(50),
+    ->     marks INT,
+    ->     dept_id INT
+    -> );
+Query OK, 0 rows affected (0.707 sec)
+
+mysql> INSERT INTO Students VALUES
+    -> (1, 'Anu', 80, 1),
+    -> (2, 'Rahul', 60, 1),
+    -> (3, 'Sneha', 90, 2),
+    -> (4, 'Kiran', 70, 2);
+Query OK, 4 rows affected (0.386 sec)
+Records: 4  Duplicates: 0  Warnings: 0
+
+mysql> SELECT name, marks
+    -> FROM Students
+    -> WHERE marks > (SELECT AVG(marks) FROM Students);
++-------+-------+
+| name  | marks |
++-------+-------+
+| Anu   |    80 |
+| Sneha |    90 |
++-------+-------+
+2 rows in set (0.033 sec)
+
+mysql> SELECT name,
+    ->        marks,
+    ->        (SELECT AVG(marks) FROM Students) AS avg_marks
+    -> FROM Students;
++-------+-------+-----------+
+| name  | marks | avg_marks |
++-------+-------+-----------+
+| Anu   |    80 |   75.0000 |
+| Rahul |    60 |   75.0000 |
+| Sneha |    90 |   75.0000 |
+| Kiran |    70 |   75.0000 |
++-------+-------+-----------+
+4 rows in set (0.008 sec)
+
+mysql> SELECT dept_id, avg_marks
+    -> FROM (
+    ->     SELECT dept_id, AVG(marks) AS avg_marks
+    ->     FROM Students
+    ->     GROUP BY dept_id
+    -> ) AS dept_avg;
++---------+-----------+
+| dept_id | avg_marks |
++---------+-----------+
+|       1 |   70.0000 |
+|       2 |   80.0000 |
++---------+-----------+
+2 rows in set (0.033 sec)
+
+mysql>
